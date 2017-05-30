@@ -5,6 +5,6 @@
                      protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
         <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
         <AssertionConsumerService index="0" isDefault="true" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
-                                  Location="http://serveur.network-drian.ovh:8083"/>
+                                  Location="http://serveur.network-drian.ovh:8083/login/callback"/>
     </SPSSODescriptor>
 </EntityDescriptor>
