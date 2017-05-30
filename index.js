@@ -41,7 +41,7 @@ app.post('/login/callback', passport.authenticate('saml',
     }
 );
 
-app.get('/logout', auth.requiresLogin, function (req, res) {
+/*app.get('/logout', auth.requiresLogin, function (req, res) {
 
     req.user.nameID = req.user.saml.nameID;
 
@@ -53,7 +53,7 @@ app.get('/logout', auth.requiresLogin, function (req, res) {
         }
     });
 
-});
+});*/
 
 const port = 8083;
 app.listen(port, function () {
