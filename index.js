@@ -8,7 +8,7 @@ passport.use(new SamlStrategy(
     {
         entryPoint: 'https://idp.ssocircle.com/sso/idpssoinit?metaAlias=%2Fpublicidp&spEntityID=http://serveur.network-drian.ovh:8083/metadata',
         issuer: serveur,
-        callbackUrl: 'http://ndcui.local:9000/login/callback/',
+        callbackUrl: 'http://serveur.network-drian.ovh:8083/login/callback/',
     },
     function (profile, done) {
         console.log(profile);
