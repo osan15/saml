@@ -7,7 +7,7 @@ var app = express();
 passport.use(new SamlStrategy(
     {
         path: '/login/callback',
-        entryPoint: 'https://idp.ssocircle.com/',
+        entryPoint: 'https://idp.ssocircle.com:443/sso/SSORedirect/metaAlias/publicidp',
         issuer: serveur
     },
     function(profile, done) {
