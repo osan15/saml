@@ -6,14 +6,28 @@ var app = express();
 
 passport.use(new SamlStrategy(
     {
-        path: '/login/callback',
         entryPoint: 'https://idp.ssocircle.com/sso/idpssoinit?metaAlias=%2Fpublicidp&spEntityID=http://serveur.network-drian.ovh:8083/metadata',
-        //entryPoint: 'https://idp.ssocircle.com:443/sso/SSORedirect/metaAlias/publicidp',
-        issuer: serveur
+        issuer: serveur,
+        callbackUrl: 'http://ndcui.local:9000/login/callback/',
     },
-    function(profile, done) {
+    function (profile, done) {
         console.log(profile);
-        if(profile) done(null, {profile : profile});
+        if (profile) {
+            return done(null,
+                {
+                    id: profile.id,
+                    email: profile.email,
+                    // displayName: profile.cn,
+                    //  firstName: profile.givenName,
+                    // lastName: profile.sn,
+                    sessionIndex: profile.sessionIndex,
+                    saml: {
+                        nameID: profile.nameID,
+                        nameIDFormat: profile.nameIDFormat,
+                        token: profile.getAssertionXml()
+                    }
+                });
+        }
     })
 );
 
@@ -44,17 +58,17 @@ app.post('/login/callback', passport.authenticate('saml',
 
 /*app.get('/logout', auth.requiresLogin, function (req, res) {
 
-    req.user.nameID = req.user.saml.nameID;
+ req.user.nameID = req.user.saml.nameID;
 
-    req.user.nameIDFormat = req.user.saml.nameIDFormat;
+ req.user.nameIDFormat = req.user.saml.nameIDFormat;
 
-    samlStrategy.logout(req, function (err, request) {
-        if (!err) {
-            res.redirect(request);
-        }
-    });
+ samlStrategy.logout(req, function (err, request) {
+ if (!err) {
+ res.redirect(request);
+ }
+ });
 
-});*/
+ });*/
 
 const port = 8083;
 app.listen(port, function () {
